@@ -41,17 +41,15 @@ jobs:
         python3 -m venv .venv
         . .venv/bin/activate
         python -m pip install --upgrade pip
-        # ▼▼▼ 1. ここに 'qmk' のインストールを追加 ▼▼▼
-        pip install qmk
-        # ▲▲▲ 追加 ▲▲▲
+        pip install qmk  # ← 1. これを追加！(仮想環境内にqmkコマンドを作ります)
         pip install -r __qmk__/requirements.txt
 
     - name: Compile and link
       run: |
         . .venv/bin/activate
-        # ▼▼▼ 2. コマンドを 'python3 -m qmk_cli' 経由に変更 ▼▼▼
+        # ▼ 2. コマンドを 'python3 -m qmk_cli' 経由に変更！
+        # これにより、確実に仮想環境(.venv)のライブラリを使ってビルドが実行されます
         python3 -m qmk_cli compile -j 4 -kb keyball/${{ inputs.keyboard }} -km ${{ inputs.keymap }}
-        # ▲▲▲ 変更 ▲▲▲
 
     - name: Archive built firmware
       uses: actions/upload-artifact@v4
