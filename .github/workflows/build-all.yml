@@ -1,4 +1,15 @@
-name: Build all firmwares
+- name: Set up Python
+  uses: actions/setup-python@v4
+  with:
+    python-version: '3.x'
+
+- name: Create and use virtualenv, then install requirements
+  run: |
+    python -m venv .venv
+    # シェルを通して有効化し、同一ステップ内で pip を実行します
+    source .venv/bin/activate
+    python -m pip install --upgrade pip
+    pip install -r __qmk__/requirements.txt
 
 on:
   push:
