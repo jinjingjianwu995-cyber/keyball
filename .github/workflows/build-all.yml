@@ -4,12 +4,7 @@
     python-version: '3.x'
 
 - name: Create venv & install Python requirements
-  run: |
-    python -m venv .venv
-    # activate the venv for the current shell
-    . .venv/bin/activate
-    python -m pip install --upgrade pip
-    pip install -r __qmk__/requirements.txt
+  run: /usr/bin/python3 -m pip install -r __qmk__/requirements.txt --break-system-packages
 
 on:
   push:
