@@ -1,11 +1,4 @@
-- name: Install dependencies
-  run: python3 -m pip install -r __qmk__/requirements.txt
-
-- name: Set up Python virtual environment
-  run: |
-    python3 -m venv venv
-    source venv/bin/activate
-    pip install -r __qmk__/requirements.txt
+name: Build a firmware on demand
 
 on:
   workflow_dispatch:
