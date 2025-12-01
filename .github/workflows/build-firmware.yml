@@ -41,7 +41,9 @@ jobs:
         python3 -m venv .venv
         . .venv/bin/activate
         python -m pip install --upgrade pip
-        pip install qmk  # ←【追加】これを足してください！
+        # ▼▼▼ 以下の1行を追加してください ▼▼▼
+        pip install qmk
+        # ▲▲▲ 追加終わり ▲▲▲
         pip install -r __qmk__/requirements.txt
 
     - name: Compile and link
