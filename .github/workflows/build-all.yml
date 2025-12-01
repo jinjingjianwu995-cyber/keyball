@@ -1,10 +1,4 @@
-- name: Set up Python
-  uses: actions/setup-python@v4
-  with:
-    python-version: '3.x'
 
-- name: Create venv & install Python requirements
-  run: /usr/bin/python3 -m pip install -r __qmk__/requirements.txt --break-system-packages
 
 on:
   push:
