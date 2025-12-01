@@ -1,14 +1,4 @@
-- name: Create venv & install Python requirements
-  run: |
-    python3 -m venv .venv
-    . .venv/bin/activate
-    python -m pip install --upgrade pip
-    pip install -r __qmk__/requirements.txt
-
-- name: Compile and link
-  run: |
-    . .venv/bin/activate
-    qmk compile -j 4 -kb keyball/${{ inputs.keyboard }} -km ${{ inputs.keymap }}
+name: Build a firmware
 
 on:
 
@@ -47,19 +37,16 @@ jobs:
       run: ln -s $(pwd)/qmk_firmware/keyboards/keyball __qmk__/keyboards/keyball
 
     - name: Create venv & install Python requirements
-  run: |
-    python3 -m venv .venv
-    . .venv/bin/activate
-    python -m pip install --upgrade pip
-    pip install -r __qmk__/requirements.txt
-
-- name: Compile and link
-  run: |
-    . .venv/bin/activate
-    qmk compile -j 4 -kb keyball/${{ inputs.keyboard }} -km ${{ inputs.keymap }}
+      run: |
+        python3 -m venv .venv
+        . .venv/bin/activate
+        python -m pip install --upgrade pip
+        pip install -r __qmk__/requirements.txt
 
     - name: Compile and link
-      run: qmk compile -j 4 -kb keyball/${{ inputs.keyboard }} -km ${{ inputs.keymap }}
+      run: |
+        . .venv/bin/activate
+        qmk compile -j 4 -kb keyball/${{ inputs.keyboard }} -km ${{ inputs.keymap }}
 
     - name: Archive built firmware
       uses: actions/upload-artifact@v4
