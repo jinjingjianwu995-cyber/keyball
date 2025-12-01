@@ -1,14 +1,10 @@
-- name: Set up Python and install requirements in venv
-  uses: actions/setup-python@v4
-  with:
-    python-version: '3.x'
+- name: Install dependencies
+  run: python3 -m pip install -r __qmk__/requirements.txt
 
-- name: Create venv and install dependencies
-  shell: bash
+- name: Set up Python venv and install dependencies
   run: |
-    python -m venv .venv
-    . .venv/bin/activate
-    python -m pip install --upgrade pip
+    python3 -m venv .venv
+    source .venv/bin/activate
     pip install -r __qmk__/requirements.txt
 
 on:
